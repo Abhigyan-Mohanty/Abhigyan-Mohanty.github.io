@@ -118,14 +118,14 @@ header {
 }
 
 .profile-img {
-  width: 500px;
-  height: 500px;
-  border-radius: 0%;
-  object-fit: cover;
-  margin-top: var(--space-md);
-  margin-bottom: var(--space-md);
-  border: 1px solid var(--border-color);
-  display: block;
+    width: 400px;          /* Adjust this to your preference */
+    height: 400px;
+    object-fit: cover;     /* Ensures the image doesn't stretch if it's not a perfect square */
+    border-radius: 0%;    /* This makes it a circular profile picture */
+    margin-bottom: 20px;   /* Adds some space below the image */
+    display: block;        /* Helps with centering */
+    margin-left: auto;
+    margin-right: auto;
 }
 
 nav {
