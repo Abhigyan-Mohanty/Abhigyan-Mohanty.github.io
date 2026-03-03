@@ -118,14 +118,19 @@ header {
 }
 
 .profile-img {
-    width: 400px;          /* Adjust this to your preference */
-    height: 400px;
-    object-fit: cover;     /* Ensures the image doesn't stretch if it's not a perfect square */
-    border-radius: 0%;    /* This makes it a circular profile picture */
-    margin-bottom: 20px;   /* Adds some space below the image */
-    display: block;        /* Helps with centering */
-    margin-left: auto;
-    margin-right: auto;
+  width: 400px;
+  /* Adjust this to your preference */
+  height: 400px;
+  object-fit: cover;
+  /* Ensures the image doesn't stretch if it's not a perfect square */
+  border-radius: 0%;
+  /* This makes it a circular profile picture */
+  margin-bottom: 20px;
+  /* Adds some space below the image */
+  display: block;
+  /* Helps with centering */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 nav {
@@ -355,6 +360,15 @@ footer {
 
 .image-placeholder img[src] {
   opacity: 1;
+}
+
+.image-placeholder video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .project-card {
