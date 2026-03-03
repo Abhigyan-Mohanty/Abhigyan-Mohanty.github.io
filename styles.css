@@ -1,8 +1,8 @@
 :root {
   /* New Colors */
   --bg-color: #EAEFEF;
-  --bg-motion-color: #A0B0BC;
-  /* Darker than previous #BFC9D1 */
+  --bg-motion-color: #7D8B96;
+  /* Even darker for more visible movement effect */
   --text-primary: #25343F;
   --text-secondary: #3a4f5d;
   --text-muted: #627b8a;
@@ -81,7 +81,8 @@ h1 {
 
 h2 {
   font-size: 1.8rem;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 2px solid var(--accent-color);
+  /* Orange underline for section headers */
   padding-bottom: 0.5rem;
 }
 
@@ -166,6 +167,8 @@ nav a::after {
   left: 0;
   background-color: var(--accent-color);
   transition: width 0.3s ease;
+  height: 3px;
+  /* Slightly thicker nav underline */
 }
 
 nav a:hover {
@@ -222,7 +225,9 @@ section {
 .contact-links a:hover {
   background-color: var(--hover-bg);
   text-decoration: none;
-  color: var(--text-primary);
+  color: var(--accent-color);
+  box-shadow: 0 0 0 1px var(--accent-color);
+  /* Orange ring on hover */
 }
 
 /* Resume styles */
@@ -379,10 +384,14 @@ footer {
 }
 
 .project-card {
-  border-left: 2px solid var(--border-color);
+  border-left: 3px solid var(--accent-color);
+  /* Persistent orange border for projects */
   padding-left: var(--space-md);
   margin-bottom: var(--space-xl);
-  transition: border-color 0.3s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: rgba(255, 155, 81, 0.03);
+  /* Very subtle orange tint */
+  border-radius: 0 8px 8px 0;
 }
 
 .project-card:hover {
