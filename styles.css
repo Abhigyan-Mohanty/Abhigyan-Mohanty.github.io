@@ -1,7 +1,8 @@
 :root {
   /* New Colors */
   --bg-color: #EAEFEF;
-  --bg-motion-color: #BFC9D1;
+  --bg-motion-color: #A0B0BC;
+  /* Darker than previous #BFC9D1 */
   --text-primary: #25343F;
   --text-secondary: #3a4f5d;
   --text-muted: #627b8a;
@@ -163,12 +164,12 @@ nav a::after {
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: var(--text-primary);
+  background-color: var(--accent-color);
   transition: width 0.3s ease;
 }
 
 nav a:hover {
-  color: var(--text-primary);
+  color: var(--accent-color);
   text-decoration: none;
 }
 
@@ -177,7 +178,7 @@ nav a:hover::after {
 }
 
 nav a.active {
-  color: var(--text-primary);
+  color: var(--accent-color);
 }
 
 nav a.active::after {
