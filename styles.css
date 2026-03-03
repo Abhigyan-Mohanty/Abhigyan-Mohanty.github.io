@@ -350,6 +350,7 @@ footer {
   opacity: 1;
   /* Ensure images are visible */
   transition: opacity 0.3s ease;
+  cursor: zoom-in;
 }
 
 .image-placeholder img[src] {
