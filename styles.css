@@ -111,12 +111,15 @@ header {
   margin-bottom: var(--space-xl);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  /* Center items in header */
+  text-align: center;
+  /* Center text in header */
 }
 
 .profile-img {
-  width: 140px;
-  height: 140px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   object-fit: cover;
   margin-top: var(--space-md);
@@ -128,8 +131,11 @@ header {
 nav {
   margin-bottom: var(--space-xl);
   display: flex;
+  justify-content: center;
+  /* Center nav items */
   gap: var(--space-md);
   flex-wrap: wrap;
+  width: 100%;
 }
 
 nav a {
@@ -183,6 +189,9 @@ section {
   display: flex;
   gap: var(--space-md);
   flex-wrap: wrap;
+  justify-content: center;
+  /* Center contact links */
+  width: 100%;
   margin-top: var(--space-sm);
   margin-bottom: var(--space-lg);
 }
