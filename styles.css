@@ -114,6 +114,17 @@ header {
   align-items: flex-start;
 }
 
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: var(--space-md);
+  margin-bottom: var(--space-md);
+  border: 1px solid var(--border-color);
+  display: block;
+}
+
 nav {
   margin-bottom: var(--space-xl);
   display: flex;
