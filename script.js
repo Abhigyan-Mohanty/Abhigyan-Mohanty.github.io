@@ -13,6 +13,34 @@ function logVisit() {
     console.log(`Visit logged: ${page} at ${timestamp}`);
 }
 
+// Scroll Motion Background Shift
+let lastScrollTop = 0;
+let scrollTimeout;
+
+window.addEventListener('scroll', () => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const distance = Math.abs(scrollTop - lastScrollTop);
+    lastScrollTop = scrollTop;
+
+    // Calculate speed factor (0 to 1) based on distance per frame
+    // normalized to about 100px per scroll event as "max speed"
+    const maxSpeed = 100;
+    const speedFactor = Math.min(distance / maxSpeed, 1);
+
+    // Shift background proportional to speed
+    const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim();
+    const motionColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-motion-color').trim();
+
+    // Interpolate colors (simple approach using composite variable)
+    document.body.style.backgroundColor = `color-mix(in srgb, ${motionColor} ${speedFactor * 100}%, ${bgColor})`;
+
+    // Reset background color when scrolling stops
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+        document.body.style.backgroundColor = '';
+    }, 150);
+}, { passive: true });
+
 // Initialize Feather icons and logging
 document.addEventListener("DOMContentLoaded", () => {
     feather.replace();
