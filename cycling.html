@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycling - Abhigyan Mohanty</title>
+    <meta name="description" content="Cycling routes and journey of Abhigyan Mohanty">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+    <div class="container animate-in">
+        <header>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="art.html">Art</a>
+                <a href="cycling.html" class="active">Cycling</a>
+            </nav>
+            <h1>Cycling</h1>
+            <p class="intro">
+                Documenting my cycling routes, meetups, and explorations around Hyderabad and beyond.
+            </p>
+
+            <div class="contact-links" style="margin-top: 0; margin-bottom: var(--space-md);">
+                <a href="https://strava.app.link/h25yI56sc1b" target="_blank" rel="noopener noreferrer">
+                    <i data-feather="activity" width="16" height="16"></i> Strava Profile
+                </a>
+                <a href="https://www.instagram.com/_abhoge_/" target="_blank" rel="noopener noreferrer">
+                    <i data-feather="instagram" width="16" height="16"></i> Instagram
+                </a>
+            </div>
+        </header>
+
+        <main>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="image-placeholder"><img src="assets/cycling/a beautiful sunset atop a viewpoint.gif"
+                            alt="Sunset viewpoint"></div>
+                    <p class="media-footnote">a beautiful sunset atop a viewpoint.gif</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder"><img src="assets/cycling/A reservoir 50 kilometers from campus.gif"
+                            alt="Reservoir"></div>
+                    <p class="media-footnote">A reservoir 50 kilometers from campus.gif</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder"><img src="assets/cycling/atop a little hill near campus.gif"
+                            alt="Hill near campus"></div>
+                    <p class="media-footnote">atop a little hill near campus.gif</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder"><img src="assets/cycling/Atop a plateau near keesara.gif"
+                            alt="Plateau near keesara"></div>
+                    <p class="media-footnote">Atop a plateau near keesara.gif</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder"><img src="assets/cycling/hills near campus.jpg"
+                            alt="Hills near campus"></div>
+                    <p class="media-footnote">hills near campus.jpg</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder"><img src="assets/cycling/My cycle.jpg" alt="My cycle"></div>
+                    <p class="media-footnote">My cycle.jpg</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder"><img src="assets/cycling/riding long distance.jpg"
+                            alt="Long distance riding"></div>
+                    <p class="media-footnote">riding long distance.jpg</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder"><img src="assets/cycling/Sketching near shamirpet lake.jpg"
+                            alt="Sketching near lake"></div>
+                    <p class="media-footnote">Sketching near shamirpet lake.jpg</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder"><img src="assets/cycling/the beautiful shamirpet lake.jpg"
+                            alt="Shamirpet lake"></div>
+                    <p class="media-footnote">the beautiful shamirpet lake.jpg</p>
+                </div>
+                <div class="gallery-item">
+                    <div class="image-placeholder"><img src="assets/cycling/Tiger viewpoint.gif" alt="Tiger viewpoint">
+                    </div>
+                    <p class="media-footnote">Tiger viewpoint.gif</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="social-footer">
+                <a href="mailto:abhigyan20.mohanty@gmail.com" target="_blank" rel="noopener noreferrer">
+                    <i data-feather="mail" width="18" height="18"></i>
+                </a>
+                <a href="https://linkedin.com/in/abhigyan-mohanty" target="_blank" rel="noopener noreferrer">
+                    <i data-feather="linkedin" width="18" height="18"></i>
+                </a>
+                <a href="https://github.com/abhigyanmohanty" target="_blank" rel="noopener noreferrer">
+                    <i data-feather="github" width="18" height="18"></i>
+                </a>
+            </div>
+            <p>&copy; <span id="year"></span> Abhigyan Mohanty.</p>
+        </footer>
+    </div>
+
+    <!-- Initialize icons and scripts -->
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

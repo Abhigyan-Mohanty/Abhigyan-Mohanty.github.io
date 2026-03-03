@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abhigyan Mohanty</title>
+    <meta name="description" content="Personal website and portfolio of Abhigyan Mohanty">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Feather Icons for lightweight modern icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body>
+    <div class="container animate-in">
+        <header>
+            <nav>
+                <a href="index.html" class="active">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="art.html">Art</a>
+                <a href="cycling.html">Cycling</a>
+            </nav>
+            
+            <h1>Abhigyan Mohanty</h1>
+            <p class="intro">
+                Dual Degree Student in Mechanical Engineering & Biological Sciences.<br>
+                Based in Hyderabad, Telangana, India.
+            </p>
+
+            <div class="contact-links">
+                <a href="mailto:abhigyan20.mohanty@gmail.com" target="_blank" rel="noopener noreferrer">
+                    <i data-feather="mail" width="16" height="16"></i> Email
+                </a>
+                <a href="https://linkedin.com/in/abhigyan-mohanty" target="_blank" rel="noopener noreferrer">
+                    <i data-feather="linkedin" width="16" height="16"></i> LinkedIn
+                </a>
+                <a href="https://github.com/abhigyanmohanty" target="_blank" rel="noopener noreferrer">
+                    <i data-feather="github" width="16" height="16"></i> GitHub
+                </a>
+            </div>
+        </header>
+
+        <main>
+            <section id="about">
+                <h2>Interests</h2>
+                <p>
+                    I thrive at the intersection of creativity and science, where I can engage with interdisciplinary work and forge novel connections between diverse ideas. I'm a passionate problem-solver who enjoys brainstorming and developing innovative solutions. The process is most rewarding when collaborating with a motivated and high-performing team.
+                </p>
+            </section>
+
+            <section id="education">
+                <h2>Education</h2>
+                
+                <div class="resume-item">
+                    <div class="resume-header">
+                        <div class="resume-title">BITS Pilani, Hyderabad Campus</div>
+                        <div class="resume-date">Sep 2022 – May 2027</div>
+                    </div>
+                    <div class="resume-subtitle">Dual Degree: B.E. Mechanical Engineering, M.Sc. Biological Sciences</div>
+                    <div class="resume-details">Hyderabad, Telangana</div>
+                </div>
+
+                <div class="resume-item">
+                    <div class="resume-header">
+                        <div class="resume-title">Delhi Public School, Hyderabad</div>
+                        <div class="resume-date">Completed 2022</div>
+                    </div>
+                    <div class="resume-details">10th Boards (CBSE): 94.2% | 12th Boards (CBSE): 89%</div>
+                </div>
+            </section>
+
+            <section id="skills">
+                <h2>Technical Skills</h2>
+                <div class="resume-item">
+                    <p><strong>Languages:</strong> Python, C++</p>
+                    <p><strong>Software:</strong> VS Code, Google Colab, Arduino IDE, Cinema4D, Rhino, Photoshop, CoppeliaSim, Fusion</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; <span id="year"></span> Abhigyan Mohanty.</p>
+        </footer>
+    </div>
+
+    <!-- Initialize icons and scripts -->
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
