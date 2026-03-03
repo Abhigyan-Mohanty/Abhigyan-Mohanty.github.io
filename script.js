@@ -28,13 +28,11 @@ function updateBackground() {
     targetIntensity *= decay;
     if (targetIntensity < 0.001) targetIntensity = 0;
 
-    // Apply color if there's enough intensity to notice
+    // Apply opacity to the edge gradient if there's enough intensity
     if (currentIntensity > 0.001) {
-        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-color').trim();
-        const motionColor = getComputedStyle(document.documentElement).getPropertyValue('--bg-motion-color').trim();
-        document.body.style.backgroundColor = `color-mix(in srgb, ${motionColor} ${currentIntensity * 100}%, ${bgColor})`;
-    } else if (document.body.style.backgroundColor !== '') {
-        document.body.style.backgroundColor = '';
+        document.body.style.setProperty('--motion-opacity', currentIntensity);
+    } else {
+        document.body.style.setProperty('--motion-opacity', 0);
     }
 
     requestAnimationFrame(updateBackground);
