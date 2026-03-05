@@ -58,6 +58,23 @@ window.addEventListener('scroll', () => {
 document.addEventListener("DOMContentLoaded", () => {
     feather.replace();
     logVisit();
+
+    // Hover play for videos
+    const videos = document.querySelectorAll('.image-placeholder video');
+    videos.forEach(video => {
+        // Ensure they are paused initially if not already
+        video.pause();
+
+        video.parentElement.addEventListener('mouseenter', () => {
+            video.play().catch(e => console.error("Playback failed:", e));
+        });
+
+        video.parentElement.addEventListener('mouseleave', () => {
+            video.pause();
+            // Optional: reset to beginning
+            // video.currentTime = 0;
+        });
+    });
 });
 
 // Simple page transiton animation helper
