@@ -59,6 +59,23 @@ document.addEventListener("DOMContentLoaded", () => {
     feather.replace();
     logVisit();
 
+    // Click to copy email
+    const emailElem = document.getElementById('email-address');
+    const toast = document.getElementById('copy-toast');
+    if (emailElem && toast) {
+        emailElem.addEventListener('click', () => {
+            const email = emailElem.textContent;
+            navigator.clipboard.writeText(email).then(() => {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+    }
+
     // Hover play for videos
     const videos = document.querySelectorAll('.image-placeholder video');
     videos.forEach(video => {

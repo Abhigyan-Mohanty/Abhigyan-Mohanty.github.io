@@ -224,6 +224,52 @@ section {
   margin-bottom: var(--space-lg);
 }
 
+.email-copy-container {
+  margin-top: calc(-1 * var(--space-xl) + var(--space-md));
+  margin-bottom: var(--space-lg);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copyable-email {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  user-select: all;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.copyable-email:hover {
+  color: #007bff;
+  /* Standard blue */
+  background-color: rgba(0, 123, 255, 0.05);
+}
+
+.copy-toast {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: var(--text-primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+.copy-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-5px);
+}
+
 .contact-links a {
   display: flex;
   align-items: center;
