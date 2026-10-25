@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiments - Abhigyan Mohanty</title>
+    <meta name="description" content="Experiments by Abhigyan Mohanty: simulations and other things to play with">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+</head>
+
+<body>
+    <div class="container animate-in">
+        <header>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="experiments.html" class="active">Experiments</a>
+                <a href="art.html">Art</a>
+                <a href="cycling.html">Cycling</a>
+            </nav>
+            <h1>Experiments</h1>
+            <p class="intro">
+                Simulations and other things I build to see what happens. Most of them run right here in the browser.
+            </p>
+        </header>
+
+        <main>
+            <section id="experiments">
+                <div class="project-card">
+                    <div class="resume-header">
+                        <div class="resume-title"><a href="almost-organic.html">Almost Organic</a></div>
+                        <div class="resume-date">October 2026</div>
+                    </div>
+                    <div class="resume-subtitle">GPU simulations of nucleating particles and a 3D Game of Life</div>
+                    <ul>
+                        <li>Brownian particles that bind into drifting clusters, which grow, collide and throw pieces of
+                            themselves away once they pass a mass ceiling.</li>
+                        <li>Coloured masses that pass their colour on when they absorb one another, attract or repel
+                            other colours through what they eject, and evolve their own ejection behaviour.</li>
+                        <li>Conway's Game of Life in a cube, with adjustable creation, survival and death rules.</li>
+                        <li>CUDA notebooks for up to a million particles, and live demos that run in the browser.</li>
+                    </ul>
+                    <p><a href="almost-organic.html">Open the experiment &rarr;</a></p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; <span id="year"></span> Abhigyan Mohanty.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

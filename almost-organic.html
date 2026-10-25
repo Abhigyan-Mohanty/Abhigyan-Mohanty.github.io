@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Almost Organic - Abhigyan Mohanty</title>
+    <meta name="description" content="Almost Organic: GPU simulations of nucleating Brownian particles and a 3D Game of Life, with live demos that run in the browser">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .demo { margin: var(--space-lg) 0 var(--space-md); }
+        .demo canvas { display: block; width: 100%; max-width: 640px; aspect-ratio: 1; margin: 0 auto; border-radius: 8px; touch-action: none; }
+        #life-canvas { cursor: grab; }
+        .demo-controls { display: flex; flex-wrap: wrap; gap: var(--space-sm) var(--space-md); align-items: center; margin: var(--space-md) 0 var(--space-sm); font-size: 0.9rem; color: var(--text-secondary); }
+        .demo-controls label { display: inline-flex; align-items: center; gap: var(--space-xs); white-space: nowrap; }
+        .demo-controls input[type=range] { width: 110px; accent-color: var(--accent-color); }
+        .demo-controls input[type=number] { width: 52px; font: inherit; padding: 1px 4px; border: 1px solid var(--border-color); border-radius: 4px; }
+        .demo-controls select { font: inherit; padding: 2px 4px; border: 1px solid var(--border-color); border-radius: 4px; max-width: 100%; }
+        .demo-controls output { font-variant-numeric: tabular-nums; color: var(--text-primary); min-width: 3.5em; }
+        .demo button { font: inherit; font-size: 0.9rem; padding: 3px 12px; border: 1px solid var(--accent-color); border-radius: 4px; background: transparent; color: var(--text-primary); cursor: pointer; }
+        .demo button:hover { background: var(--hover-bg); }
+        .demo button.on { background: var(--accent-color); color: #fff; }
+        .demo-info { font-size: 0.85rem; color: var(--text-muted); font-variant-numeric: tabular-nums; text-align: center; margin-top: var(--space-sm); }
+        .demo-note { font-size: 0.85rem; color: var(--text-muted); }
+        .downloads a { display: inline-flex; align-items: center; gap: 0.3rem; }
+    </style>
+</head>
+
+<body>
+    <div class="container animate-in">
+        <header>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="projects.html">Projects</a>
+                <a href="experiments.html" class="active">Experiments</a>
+                <a href="art.html">Art</a>
+                <a href="cycling.html">Cycling</a>
+            </nav>
+            <h1>Almost Organic</h1>
+            <p class="intro">
+                Simple local rules, millions of particles, and shapes that start to look alive.
+            </p>
+        </header>
+
+        <main>
+            <section id="about">
+                <h2>The idea</h2>
+                <p>
+                    How little does it take for something to look organic? Here particles only random-walk and stick
+                    to what they touch. The clusters they form keep drifting as rigid bodies with momentum, bounce
+                    off the walls, and freeze when they touch a seed in the middle. Add a rule that a mass grown past
+                    a ceiling throws a piece of itself away, and the system stops settling down: masses grow, shed,
+                    collide and regrow.
+                </p>
+                <p>
+                    Then the masses get colours. A mass that attaches to a larger one takes on its colour, and a new
+                    one formed by free particles gets a random colour. With the colour rule on, a mass throws its
+                    pieces towards masses of another colour and away from its own, more often the closer they are.
+                    An evolution mode gives each colour its own ejection behaviour, and the colours whose masses live
+                    longest mutate least.
+                </p>
+                <p>
+                    The full versions are Jupyter notebooks that run on an NVIDIA GPU with <code>numba.cuda</code>,
+                    up to a million particles in a 1000³ box. The demos below are smaller ports that run in your
+                    browser.
+                </p>
+            </section>
+
+            <section id="nucleation">
+                <h2>Nucleation in 2D</h2>
+                <p>
+                    Free particles are faint white. Bound particles are shaded from black (bound first) to white
+                    (bound most recently). Masses near the mass ceiling are drawn in their colour, and everything else
+                    is dimmed. Try turning the colour rule off, or switching on the anchor (a seed in the middle that
+                    everything touching it sticks to) and pressing Reset.
+                </p>
+                <div class="demo">
+                    <canvas id="nuc-canvas" aria-label="2D nucleation simulation"></canvas>
+                    <div id="nuc-info" class="demo-info"></div>
+                    <div class="demo-controls">
+                        <button id="nuc-run">Pause</button> <button id="nuc-reset">Reset</button>
+                        <label>steps/frame <input id="nuc-speed" type="range" min="1" max="30" value="3"> <output id="nuc-speed-v"></output></label>
+                        <label>particles <input id="nuc-n" type="range" min="500" max="15000" step="500" value="2500"> <output id="nuc-n-v"></output></label>
+                        <label>box <input id="nuc-l" type="range" min="80" max="300" step="10" value="160"> <output id="nuc-l-v"></output></label>
+                        <span class="demo-note">(particles and box apply on Reset)</span>
+                    </div>
+                    <div class="demo-controls">
+                        <label>mass ceiling <input id="nuc-cap" type="range" min="10" max="500" step="5" value="40"> <output id="nuc-cap-v"></output></label>
+                        <label>eject rate <input id="nuc-erate" type="range" min="-4" max="0" step="0.1" value="-1.3"> <output id="nuc-erate-v"></output></label>
+                        <label>ejecta <input id="nuc-efrac" type="range" min="1" max="99" value="25"> <output id="nuc-efrac-v"></output></label>
+                        <label>eject speed <input id="nuc-v0" type="range" min="0.05" max="1" step="0.05" value="0.5"> <output id="nuc-v0-v"></output></label>
+                    </div>
+                    <div class="demo-controls">
+                        <button id="nuc-crule"></button>
+                        <label>colours <input id="nuc-ncol" type="range" min="2" max="8" value="3"> <output id="nuc-ncol-v"></output></label>
+                        <label>rate = k at <input id="nuc-dref" type="range" min="1" max="100" value="20"> <output id="nuc-dref-v"></output></label>
+                        <button id="nuc-hl"></button> <button id="nuc-win"></button> <button id="nuc-anchor"></button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="life">
+                <h2>Game of Life in 3D</h2>
+                <p>
+                    The same question asked of Conway's Game of Life, in a cube. Each step every voxel counts the live
+                    cells around it. A dead voxel is created if the count is in the birth range. A live cell is
+                    sustained, and ages, if it is in the survival range, and otherwise dies of isolation or
+                    overcrowding. The window is either the 26 voxels around a cell, or 2×2×2 blocks that shift by
+                    one voxel each step. Cells are coloured by age, from newborn yellow to old dark red.
+                    <strong>Drag</strong> to rotate, <strong>scroll</strong> to zoom, <strong>double-click</strong> to
+                    reset the view.
+                </p>
+                <div class="demo">
+                    <canvas id="life-canvas" aria-label="3D Game of Life simulation"></canvas>
+                    <div id="life-info" class="demo-info"></div>
+                    <div class="demo-controls">
+                        <button id="life-run">Pause</button> <button id="life-step">Step</button> <button id="life-reset">Reset</button>
+                        <label>steps/frame <input id="life-speed" type="range" min="1" max="10" value="1"> <output id="life-speed-v"></output></label>
+                        <label>box <input id="life-l" type="range" min="16" max="80" step="2" value="48"> <output id="life-l-v"></output></label>
+                        <label>cells <input id="life-n" type="range" min="100" max="20000" step="100" value="2500"> <output id="life-n-v"></output></label>
+                        <label>in a central cube of <input id="life-soup" type="range" min="10" max="100" value="40"> <output id="life-soup-v"></output></label>
+                        <span class="demo-note">(size settings apply on Reset)</span>
+                    </div>
+                    <div class="demo-controls">
+                        <button id="life-win"></button> <button id="life-wrap"></button>
+                        <label>birth <input id="life-b0" type="number" min="0"> to <input id="life-b1" type="number" min="0"></label>
+                        <label>survival <input id="life-s0" type="number" min="0"> to <input id="life-s1" type="number" min="0"></label>
+                        <select id="life-preset" aria-label="Rule presets"></select>
+                        <label>opacity <input id="life-op" type="range" min="5" max="100" value="40"> <output id="life-op-v"></output></label>
+                    </div>
+                    <p id="life-rule" class="demo-note"></p>
+                </div>
+            </section>
+
+            <section id="notebooks">
+                <h2>The notebooks</h2>
+                <p>
+                    Each notebook runs the simulation on the GPU and serves an interactive viewer from the Jupyter
+                    kernel. They need an NVIDIA GPU, <code>numba</code> and <code>numpy</code>.
+                </p>
+                <ul class="downloads">
+                    <li><a href="assets/experiments/almost_organic/nucleation_cuda.ipynb" download><i data-feather="download" width="14" height="14"></i> nucleation_cuda.ipynb</a>: the full model in 3D, with first-order decay, diffusers and aggregators, the colour rule and evolution.</li>
+                    <li><a href="assets/experiments/almost_organic/nucleation_cuda2d.ipynb" download><i data-feather="download" width="14" height="14"></i> nucleation_cuda2d.ipynb</a>: the same model in 2D, up to a 4096² grid.</li>
+                    <li><a href="assets/experiments/almost_organic/conways_3d.ipynb" download><i data-feather="download" width="14" height="14"></i> conways_3d.ipynb</a>: the 3D Game of Life, up to a 512³ box.</li>
+                </ul>
+                <p>
+                    Under the hood: lock-free union-find for the clusters, cell lists rebuilt every step, one
+                    cooperative CUDA kernel per batch of steps with grid-wide syncs between its phases, and a viewer
+                    that draws into a depth buffer so a million particles stay interactive.
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; <span id="year"></span> Abhigyan Mohanty.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="assets/experiments/almost_organic/nucleation2d.js"></script>
+    <script src="assets/experiments/almost_organic/life3d.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>
